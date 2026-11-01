@@ -156,7 +156,8 @@ class AegisTui {
     // Switch to alternate screen and hide cursor
     process.stdout.write(ANSI.altScreenOn + ANSI.cursorHide + ANSI.clearScreen);
 
-    // Setup input
+    // Setup input - ensure stdin is actively flowing and resumed
+    process.stdin.resume();
     readline.emitKeypressEvents(process.stdin);
     if (process.stdin.isTTY) {
       process.stdin.setRawMode(true);

@@ -40,25 +40,26 @@ ${'\x1b[1m'}ENVIRONMENT VARIABLES:${'\x1b[0m'}
  */
 function promptPassword(promptText = 'Enter vault password: ') {
   return new Promise((resolve) => {
-    if (!process.stdin.isTTY) {
-      const rl = readline.createInterface({ input: process.stdin, output: process.stdout });
-      rl.question('', (answer) => {
-        rl.close();
-        resolve(answer);
-      });
+    const stdin = process.stdin;
+
+    if (!stdin.isTTY) {
+      let buffer = '';
+      const onData = (chunk) => {
+        buffer += chunk.toString();
+        const newlineIdx = buffer.indexOf('\n');
+        if (newlineIdx !== -1) {
+          stdin.removeListener('data', onData);
+          resolve(buffer.slice(0, newlineIdx).replace(/\r$/, ''));
+        }
+      };
+      stdin.on('data', onData);
+      stdin.resume();
       return;
     }
-
-    const rl = readline.createInterface({
-      input: process.stdin,
-      output: process.stdout
-    });
 
     let password = '';
     process.stdout.write(promptText);
 
-    // Save terminal state and catch raw keypresses
-    const stdin = process.stdin;
     stdin.setRawMode(true);
     stdin.resume();
 
@@ -67,14 +68,14 @@ function promptPassword(promptText = 'Enter vault password: ') {
       for (let i = 0; i < str.length; i++) {
         const char = str[i];
         if (char === '\r' || char === '\n' || char === '\u0004') {
-          stdin.setRawMode(false);
           stdin.removeListener('data', onData);
-          rl.close();
+          stdin.setRawMode(false);
           process.stdout.write('\n');
           resolve(password);
           return;
         } else if (char === '\u0003') {
           // Ctrl+C
+          stdin.removeListener('data', onData);
           stdin.setRawMode(false);
           process.stdout.write('\n');
           process.exit(130);
