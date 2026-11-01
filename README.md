@@ -1,5 +1,9 @@
 # Aegis TUI 🛡️
 
+### Screenshot
+<img width="1911" height="951" alt="image" src="https://github.com/user-attachments/assets/bd48dddf-cced-4f7c-90f6-6509dca3d294" />
+
+
 A lightweight, zero-dependency Terminal User Interface (TUI) for [Aegis Authenticator](https://github.com/beemdevelopment/aegis) vault exports.
 
 It reads an exported Aegis JSON vault (both **unencrypted** and **password-encrypted**), displays your accounts, and calculates live **TOTP** codes with real-time countdown progress.
