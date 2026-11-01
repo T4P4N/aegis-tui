@@ -1,0 +1,29 @@
+{
+  "name": "aegis-tui",
+  "version": "1.0.0",
+  "description": "Terminal User Interface (TUI) for Aegis Authenticator vaults with live TOTP generation",
+  "main": "src/tui.js",
+  "bin": {
+    "aegis-tui": "./bin/aegis-tui.js"
+  },
+  "scripts": {
+    "start": "node ./bin/aegis-tui.js ./samples/aegis_plain.json",
+    "start:enc": "node ./bin/aegis-tui.js ./samples/aegis_encrypted.json -p test",
+    "test": "node --test test/*.test.js"
+  },
+  "keywords": [
+    "aegis",
+    "authenticator",
+    "totp",
+    "hotp",
+    "tui",
+    "terminal",
+    "2fa",
+    "mfa"
+  ],
+  "author": "",
+  "license": "MIT",
+  "engines": {
+    "node": ">=18.0.0"
+  }
+}
