@@ -6,7 +6,7 @@ It reads an exported Aegis JSON vault (both **unencrypted** and **password-encry
 
 ---
 
-## ✨ Features
+## Features
 
 - **Direct Aegis JSON Support**: Works directly with exported Aegis vault JSON files.
 - **Plaintext & Encrypted Vaults**: Decrypts password-protected Aegis vaults using standard `scrypt` + `AES-256-GCM` with interactive masked password prompt or `-p` flag.
@@ -19,7 +19,7 @@ It reads an exported Aegis JSON vault (both **unencrypted** and **password-encry
 
 ---
 
-## 🚀 Quick Start
+## Quick Start
 
 ### 1. Run Directly
 
@@ -61,7 +61,7 @@ aegis-tui /path/to/your/aegis-export.json
 
 ---
 
-## 📁 CLI Usage
+## CLI Usage
 
 ```text
 aegis-tui [options] [path/to/aegis_export.json]
@@ -81,7 +81,7 @@ Options:
 
 ---
 
-## 🧪 Testing
+## Testing
 
 Run the test suite (uses Node.js native test runner):
 
@@ -99,7 +99,7 @@ Tests verify:
 
 ---
 
-## 🛠️ Project Structure
+## Project Structure
 
 ```text
 aegis-tui/
@@ -119,3 +119,6 @@ aegis-tui/
 │   └── aegis_encrypted.json # Sample encrypted vault (password: "test")
 └── package.json
 ```
+
+- Note: This is project is made with agy cli, i was not able to find good TOTP app, which supported my aegis json export, hence i decided to build it for myself. Drop a start if you find it is useful.
+
